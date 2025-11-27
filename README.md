@@ -7,11 +7,11 @@
 
 #代码介绍：
 
-contact.h主要负责函数的声明
+contact.h函数声明
 
-contact.c主要负责函数内容的设计
+contact.c函数设计
 
-test.c程序入口，用户交互和主函数搭建
+test.c主函数搭建
 
 zip文件可打包带走
 
