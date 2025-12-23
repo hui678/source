@@ -1,3 +1,30 @@
+int modifyStudent(Student arr[], int count, char *id)
+{
+    int index = queryStudent(arr, count, id);
+    if (index == -1)
+    {
+        return -1;
+    }
+
+    clearInputBuffer();
+
+    printf("\nè¯·è¾“å…¥è¯¥å­¦ç”Ÿçš„æ–°ä¿¡æ¯ï¼š\n");
+    printf("æ–°å§“åï¼š");
+    fgets(arr[index].name, sizeof(arr[index].name), stdin);
+    arr[index].name[strcspn(arr[index].name, "\n")] = '\0';
+
+    printf("æ–°å¹´é¾„ï¼š");
+    scanf("%d", &arr[index].age);
+    clearInputBuffer();
+
+    printf("æ–°æˆç»©ï¼š");
+    scanf("%f", &arr[index].score);
+    clearInputBuffer();
+
+    printf("\nå­¦ç”Ÿä¿¡æ¯ä¿®æ”¹æˆåŠŸï¼\nä¿®æ”¹åçš„ä¿¡æ¯ï¼š\n");
+    printf("ID:%s\n Name:%s\n Age:%d\n Score:%.2f\n", arr[index].id, arr[index].name, arr[index].age, arr[index].score);
+    return index;
+}
 #define _CRT_SECURE_NO_WARNINGS
 #include "contest.h"
 void ADD(node** phead)
@@ -8,9 +35,9 @@ void ADD(node** phead)
 		printf("%s", strerror(errno));
 		return;
 	}
-	printf("ÇëÊäÈëĞÕÃû\n");
+	printf("è¯·è¾“å…¥å§“å\n");
 	scanf("%s", new->name);
-	printf("ÇëÊäÈëºÅÂë\n");
+	printf("è¯·è¾“å…¥å·ç \n");
 	scanf("%s", new->tele);
 	if (*phead == NULL)
 	{
@@ -27,18 +54,18 @@ void ADD(node** phead)
 		p->next = new;
 		new->next = NULL;
 	}
-	printf("ÁªÏµÈËÌí¼ÓÍê±Ï\n");
+	printf("è”ç³»äººæ·»åŠ å®Œæ¯•\n");
 	num++;
 }
 node* get(node**phead)
 {
 	if (*phead == NULL)
 	{
-		printf("Á´±íÎª¿Õ£¬ÎŞÁªÏµÈË¿É²Ù×÷£¡\n");
+		printf("é“¾è¡¨ä¸ºç©ºï¼Œæ— è”ç³»äººå¯æ“ä½œï¼\n");
 		return NULL;
 	}
 	char goatname[20] = { 0 };
-	printf("ÇëÊäÈëÒª²Ù×÷µÄÁªÏµÈËĞÕÃû\n");
+	printf("è¯·è¾“å…¥è¦æ“ä½œçš„è”ç³»äººå§“å\n");
 	scanf("%s", goatname);
 	node* p = *phead;
 	if (strcmp(goatname, p->name)==0)
@@ -51,7 +78,7 @@ node* get(node**phead)
 	}
 	if (p->next== NULL)
 	{
-		printf("²»´æÔÚ´ËÁªÏµÈË\n");
+		printf("ä¸å­˜åœ¨æ­¤è”ç³»äºº\n");
 		return NULL;
 	}
 	else
@@ -63,10 +90,10 @@ void DELE(node** phead)
 {
 	if (*phead == NULL)
 	{
-		printf("ÔİÎŞÁªÏµÈËÊı¾İ\n");
+		printf("æš‚æ— è”ç³»äººæ•°æ®\n");
 		return ;
 	}
-	//Ğ´Ò»¸ö²éÕÒº¯Êı
+	//å†™ä¸€ä¸ªæŸ¥æ‰¾å‡½æ•°
 	node* re = get(phead);
 	if (re == NULL)
 	{
@@ -85,14 +112,14 @@ void DELE(node** phead)
 		free(temp);
 		temp= NULL;
 	}
-	printf("É¾³ıÍê±Ï\n");
+	printf("åˆ é™¤å®Œæ¯•\n");
 	num--;
 }
 void SEAR(node** phead)
 {
 	if (*phead == NULL)
 	{
-		printf("ÔİÎŞÁªÏµÈËÊı¾İ\n");
+		printf("æš‚æ— è”ç³»äººæ•°æ®\n");
 		return;
 	}
 	node* re = get(phead);
@@ -102,19 +129,19 @@ void SEAR(node** phead)
 	}
 	else if (re ==*phead)
 	{
-		printf("ĞÕÃû:  %s\nºÅÂë:   %s\n", re->name, re->tele);
+		printf("å§“å:  %s\nå·ç :   %s\n", re->name, re->tele);
 		return;
 	}
 	else
 	{
-		printf("ĞÕÃû:  %s\nºÅÂë:   %s\n", (re->next)->name, (re->next)->tele);
+		printf("å§“å:  %s\nå·ç :   %s\n", (re->next)->name, (re->next)->tele);
 	}
 }
 void UPDATE(node** phead)
 {
 	if (*phead == NULL)
 	{
-		printf("ÔİÎŞÁªÏµÈËÊı¾İ\n");
+		printf("æš‚æ— è”ç³»äººæ•°æ®\n");
 		return;
 	}
 	node* re = get(phead);
@@ -124,12 +151,12 @@ void UPDATE(node** phead)
 	}
 	else if (re==*phead)
 	{
-		printf("ÇëÊäÈëĞÂµÄºÅÂë\n");
+		printf("è¯·è¾“å…¥æ–°çš„å·ç \n");
 		scanf("%s", re->tele);
 	}
 	else
 	{
-		printf("ÇëÊäÈëĞÂµÄºÅÂë\n");
+		printf("è¯·è¾“å…¥æ–°çš„å·ç \n");
 		scanf("%s", (re->next)->tele);
 	}
 }
@@ -137,13 +164,13 @@ void SHOW(node** phead)
 {
 	if (*phead == NULL)
 	{
-		printf("ÔİÎŞÁªÏµÈËÊı¾İ\n");
+		printf("æš‚æ— è”ç³»äººæ•°æ®\n");
 		return;
 	}
 	node* p = *phead;
 	while (p!= NULL)
 	{
-		printf("ĞÕÃû:%s\nºÅÂë:%s\n", p->name, p->tele);
+		printf("å§“å:%s\nå·ç :%s\n", p->name, p->tele);
 		p = p->next;
 	}
 }
@@ -151,11 +178,11 @@ void init(node** phead)
 {
 	*phead = NULL;
 	num = 0;
-	printf("³õÊ¼»¯Íê³É\n");
+	printf("åˆå§‹åŒ–å®Œæˆ\n");
 }
 //void init(node** phead)
 //{
-//	FILE* tp = fopen("C:\\Users\\28152\\Desktop\\Á´±íÍ¨Ñ¶Â¼2.txt", "rb");
+//	FILE* tp = fopen("C:\\Users\\28152\\Desktop\\é“¾è¡¨é€šè®¯å½•2.txt", "rb");
 //	if (tp == NULL)
 //	{
 //		printf("%s", strerror(errno));
@@ -163,7 +190,7 @@ void init(node** phead)
 //	}
 //	fread(&num, sizeof(int), 1, tp);
 //	node* new = NULL;
-//	node* temp = NULL;//¹Ø¼üÖ¸Õë
+//	node* temp = NULL;//å…³é”®æŒ‡é’ˆ
 //	for (int i = 1; i <= num; i++)
 //	{
 //		new = calloc(1, sizeof(node));
@@ -188,7 +215,7 @@ void init(node** phead)
 //	{
 //		return;
 //	}
-//	FILE* tp = fopen("C:\\Users\\28152\\Desktop\\Á´±íÍ¨Ñ¶Â¼2.txt", "wb");
+//	FILE* tp = fopen("C:\\Users\\28152\\Desktop\\é“¾è¡¨é€šè®¯å½•2.txt", "wb");
 //	if (tp == NULL)
 //	{
 //		printf("%s", strerror(errno));
@@ -203,4 +230,5 @@ void init(node** phead)
 //	}
 //	fclose(tp);
 //	tp = NULL;
+
 //}
