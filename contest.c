@@ -1,30 +1,4 @@
-int modifyStudent(Student arr[], int count, char *id)
-{
-    int index = queryStudent(arr, count, id);
-    if (index == -1)
-    {
-        return -1;
-    }
 
-    clearInputBuffer();
-
-    printf("\n请输入该学生的新信息：\n");
-    printf("新姓名：");
-    fgets(arr[index].name, sizeof(arr[index].name), stdin);
-    arr[index].name[strcspn(arr[index].name, "\n")] = '\0';
-
-    printf("新年龄：");
-    scanf("%d", &arr[index].age);
-    clearInputBuffer();
-
-    printf("新成绩：");
-    scanf("%f", &arr[index].score);
-    clearInputBuffer();
-
-    printf("\n学生信息修改成功！\n修改后的信息：\n");
-    printf("ID:%s\n Name:%s\n Age:%d\n Score:%.2f\n", arr[index].id, arr[index].name, arr[index].age, arr[index].score);
-    return index;
-}
 #define _CRT_SECURE_NO_WARNINGS
 #include "contest.h"
 void ADD(node** phead)
@@ -232,4 +206,5 @@ void init(node** phead)
 //	tp = NULL;
 
 //}
+
 
